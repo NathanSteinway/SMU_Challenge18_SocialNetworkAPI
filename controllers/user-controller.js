@@ -1,6 +1,7 @@
 const { User } = require('../models');
 
 const userController = {
+
     getAllUser(req, res) {
         User.find({})
             .select('-__v')
@@ -57,4 +58,4 @@ const userController = {
     }
 };
 
-module.export = userController;
+module.exports = userController;
