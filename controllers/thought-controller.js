@@ -52,7 +52,10 @@ const thoughtController = {
     },
 
     updateThought({ params, body }, res) {
-        Thought.findOneAndUpdate({ _id: params.id }, body, { new: true, runValidators: true })
+        Thought.findOneAndUpdate(
+            { _id: params.id }, 
+            body, 
+            { new: true, runValidators: true })
             .then(dbThoughtData => {
                 if (!dbThoughtData) {
                     res.status(404).json({ message: 'Thought could not be found' });
@@ -85,7 +88,7 @@ const thoughtController = {
                 path: 'reactions', 
                 select: '-__v' 
             })
-            
+
             .select('-__v')
             .then(dbThoughtData => {
                 if (!dbThoughtData) {
@@ -110,7 +113,7 @@ const thoughtController = {
                 }
                 res.json(dbThoughtData);
             })
-            .catch(err => res.json(err));
+            .catch(err => res.status(400).json(err));
     }
 };
 
